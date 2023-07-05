@@ -1,8 +1,64 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
-body {
+* {
   font-family: 'Open Sans', sans-serif;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   text-align: center;
+}
+
+body {
+  background-color: #000000;
+  color: #f8fafc;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.App p {
+  font-weight: 600;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.location {
+  margin-top: 20px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  font-stretch: expanded;
+  
+}
+
+.main-temp {
+  font-size: 5rem;
+  font-weight: 300;
+  line-height: 5rem;
+  background-image: linear-gradient(90deg, rgb(123, 91, 199) 0%, rgb(234, 56, 141) 100%);
+  background-size: 100%;
+  background-repeat: repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+#description {
+  margin: 20px 0 5px 0;
+}
+
+.hi-lo {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 5px;
 }

@@ -30,7 +30,9 @@ function App() {
       setForecast(data.forecast.forecastday)
       setLocation(data.location.name)
       setSearchField('')
-    })    
+    console.log(data)
+
+    })
   }
 
   const handleChange = (e) => {
@@ -43,19 +45,17 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        {
-          <div>
-            <p>{location}</p>
-            <p>{hiTemp}</p>
-            <p>{lowTemp}</p>
-            <p>{currentTemp}</p>
-            <p>{description}</p>
+      <div className='stats'> 
+            <h2 className='location'>{location}</h2>
+            <h1 className='main-temp'>{Math.round(currentTemp)}°</h1>
+            <p id='description'>{description}</p>
+            <div className='hi-lo'>
+              <p>H:{Math.round(hiTemp)}°</p>
+              <p>L:{Math.round(lowTemp)}°</p>
+            </div>
             {/* {forecast.map(data => (
               <p>{data.day.avgtemp_f}</p>
             ))} */}
-          </div>
-        }
       </div>
       <SearchBox 
           searchField={searchField}

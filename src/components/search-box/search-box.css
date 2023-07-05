@@ -7,14 +7,19 @@
 .search-box-container input {
   padding: .5rem;
   border-radius: .4rem;
+  border: none;
+  background-color: #f8fafc;
   margin-bottom: .5rem;
   width: 15rem;
+  font-size: 1rem;
 }
 
 .search-box-container button {
   border-radius: .4rem;
   border: none;
   padding: .6rem;
-  width: 5rem;
-  
+  width: 6rem;
+  color: #f8fafc;
+  background: linear-gradient(90deg, rgb(123, 91, 199) 0%, rgb(234, 56, 141) 100%);
+  font-size: 1rem;
 }
