@@ -1,0 +1,6 @@
+.forecast-day {
+  margin: .8rem;
+  display: flex;
+  flex-direction: column;
+  
+}

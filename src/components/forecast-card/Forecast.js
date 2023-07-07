@@ -1,15 +1,17 @@
 import React from 'react'
-import './forecast-card.css'
+import './forecast.css'
 import ForecastItem from '../forecast-item/ForecastItem'
 
 const Forecast = ({ forecast }) => {
   console.log(forecast)
   return (
     <div className='forecast-container'>
-      <h4>Forecast</h4>
-      {forecast.map(forecastDay => (
-        <ForecastItem forecastDay={forecastDay} />
-      ))}
+      <h4>3-DAY FORECAST</h4>
+      <div className='forecast-days-container'>
+        {forecast.map(forecastDay => (
+          <ForecastItem forecastDay={forecastDay} key={forecast.id}/>
+        ))}
+      </div>
     </div>
   )
 }

@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: .6rem;
 }
 
 .search-box-container input {
@@ -22,4 +23,14 @@
   color: var(--color-text);
   background: var(--color-accent);
   font-size: 1rem;
+  font-weight: 600;
+  transition: transform 0.3s
+}
+
+.search-box-container button:active {
+  transform: translateY(3px)
+}
+
+.search-box-container button:hover {
+  cursor: pointer;
 }
