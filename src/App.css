@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
+:root, 
+[data-selected-theme='dark'] {
+  --color-background: #000000; 
+  --color-text: #f8fafc; 
+  --color-accent: linear-gradient(90deg, rgb(123, 91, 199) 0%, rgb(234, 56, 141) 100%);
+}
+
+[data-selected-theme='light'] {
+  --color-background: linear-gradient(90deg, rgb(123, 91, 199) 0%, rgb(234, 56, 141) 100%);
+  --color-text: #f8fafc;
+  --color-accent: #000000;
+}
+
 * {
   font-family: 'Open Sans', sans-serif;
   margin: 0;
@@ -9,8 +22,25 @@
 }
 
 body {
-  background-color: #000000;
-  color: #f8fafc;
+  background-color: var(--color-background);
+  background-image: var(--color-background);
+  color: var(--color-text);
+}
+
+.theme-switcher {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.theme-switcher button {
+  border-radius: .4rem;
+  border: none;
+  padding: .6rem;
+  width: 6rem;
+  color: var(--color-text);
+  background: var(--color-accent);
+  font-size: 1rem;
 }
 
 .App {
@@ -34,15 +64,14 @@ body {
   margin-top: 20px;
   font-size: 1.8rem;
   font-weight: 600;
-  font-stretch: expanded;
-  
+  font-stretch: expanded;  
 }
 
 .main-temp {
   font-size: 5rem;
   font-weight: 300;
   line-height: 5rem;
-  background-image: linear-gradient(90deg, rgb(123, 91, 199) 0%, rgb(234, 56, 141) 100%);
+  background-image: var(--color-accent);
   background-size: 100%;
   background-repeat: repeat;
   background-clip: text;
@@ -50,6 +79,11 @@ body {
   -webkit-text-fill-color: transparent; 
   -moz-background-clip: text;
   -moz-text-fill-color: transparent;
+}
+
+[data-selected-theme='light'] .main-temp {
+  -webkit-text-fill-color: var(--color-text);
+  -moz-text-fill-color: var(--color-text);
 }
 
 #description {

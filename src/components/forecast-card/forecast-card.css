@@ -1,0 +1,7 @@
+.forecast-container {
+  background-color: #1e1633;
+  width: 90%;
+  height: 25vh;
+  border-radius: .4rem;
+  padding: .4rem;
+}
