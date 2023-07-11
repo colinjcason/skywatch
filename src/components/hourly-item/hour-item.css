@@ -1,0 +1,16 @@
+.hour-item {
+  margin: 0px;
+}
+
+.formatted-time {
+  font-size: 13px;
+}
+
+.rain-percent {
+  margin-top: -5px;
+  font-size: 12px
+}
+
+.hour-item img {
+  width: 75px;
+}

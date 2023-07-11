@@ -3,7 +3,6 @@ import './forecast.css'
 import ForecastItem from '../forecast-item/ForecastItem'
 
 const Forecast = ({ forecast }) => {
-  console.log(forecast)
   return (
     <div className='forecast-container'>
       <h4>3-DAY FORECAST</h4>

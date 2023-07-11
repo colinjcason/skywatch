@@ -1,0 +1,16 @@
+::-webkit-scrollbar {
+  width: 0;
+}
+
+.hourly-container {
+  display: flex;
+  align-items: center;
+  overflow-x: scroll;
+  background-color: #1e1633;
+  width: 450px;
+  max-height: 200px;
+  border-radius: .4rem;
+  padding-top: .4rem;
+  padding-bottom: 0;
+  margin-top: -10px;
+}
