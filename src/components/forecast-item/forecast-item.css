@@ -2,5 +2,9 @@
   margin: .8rem;
   display: flex;
   flex-direction: column;
-  
+  align-items: center;
+}
+
+.forecast-day img {
+  width: 80px;
 }

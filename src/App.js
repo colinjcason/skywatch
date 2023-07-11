@@ -13,11 +13,17 @@ function App() {
   const [lowTemp, setLowTemp] = useState('')
   const [forecast, setForecast] = useState([])
   const [searchField, setSearchField] = useState('san diego')
-  const [selectedTheme, setSelectedTheme] = useState('dark')
+  const [theme, setTheme] = useState('dark')
+  const [checked, setChecked] = useState(true)
+
 
   useEffect(() => {
     getWeather()
   }, [])
+
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
 
   const getWeather = () => {    
     return fetch(`http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${searchField}&days=3&aqi=no&alerts=no`)
@@ -44,18 +50,20 @@ function App() {
     getWeather() 
   }
 
-  const handleThemeSelection = (event) => {
-    const theme = event.target.getAttribute('data-theme');
-    document.documentElement.setAttribute("data-selected-theme", theme)
-    setSelectedTheme(theme);
+  const handleThemeSelection = () => {
+    if (theme === 'dark') {
+      setTheme('light');
+    } else {
+      setTheme('dark');
+    }
   }
 
   return (
-    <div className="App">
-      <div className='theme-switcher'>
-        <button data-theme='light' onClick={handleThemeSelection}>Light</button>
-        <button data-theme='dark' onClick={handleThemeSelection}>Dark</button>
-      </div>
+    <div className={`App ${theme}`}>
+      <label class="switch">
+        <input type="checkbox" onClick={handleThemeSelection} />
+        <span class="slider round"></span>
+      </label>
 
       <div className='stats'> 
             <h2 className='location'>{location}</h2>
