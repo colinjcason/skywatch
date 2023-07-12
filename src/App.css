@@ -59,11 +59,11 @@ body {
 }
 
 #description {
-  margin: 20px 0 5px 0;
+  margin-top: 20px;
 }
 
 .description-container img {
-  width: 5rem;
+  width: 6rem;
 }
 
 .main-temp {
