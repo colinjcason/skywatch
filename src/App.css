@@ -25,6 +25,7 @@ body {
   background-color: var(--color-background);
   background-image: var(--color-background);
   color: var(--color-text);
+  user-select: none;
 }
 
 .App {
