@@ -9,9 +9,10 @@ const HourItem = ({ hour }) => {
   return (
     <div className='hour-item'>
       <p className='formatted-time'>{formattedTime(hour.time_epoch)}</p>
-      <img src={hour.condition.icon} alt='icon'/>
-      <p className='rain-percent'>{hour.chance_of_rain > 0 ? hour.chance_of_rain + '%' : null}</p>
-      {/* <p className='rain-percent'>70%</p> */}
+      <img src={hour.condition.icon} alt='icon' />
+      <p className='rain-percent'>
+        {hour.chance_of_rain > 0 ? hour.chance_of_rain + '%' : null}
+      </p>
       <p>{Math.round(hour.temp_f)}°</p>
     </div>
   )

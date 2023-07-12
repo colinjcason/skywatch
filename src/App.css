@@ -25,6 +25,9 @@ body {
   background-color: var(--color-background);
   background-image: var(--color-background);
   color: var(--color-text);
+  margin-bottom: 20px;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
 
 .App {
@@ -52,7 +55,16 @@ body {
 
 .description-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#description {
+  margin: 20px 0 5px 0;
+}
+
+.description-container img {
+  width: 5rem;
 }
 
 .main-temp {
@@ -70,12 +82,8 @@ body {
 }
 
 .light .main-temp {
-  -webkit-text-fill-color: var(--color-accent);
-  -moz-text-fill-color: var(--color-accent);
-}
-
-#description {
-  margin: 20px 0 5px 0;
+  -webkit-text-fill-color: var(--color-text);
+  -moz-text-fill-color: var(--color-text);
 }
 
 .hi-lo {

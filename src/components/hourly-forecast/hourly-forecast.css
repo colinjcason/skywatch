@@ -4,7 +4,6 @@
 
 .hourly-container {
   display: flex;
-  align-items: center;
   overflow-x: scroll;
   background-color: #1e1633;
   width: 450px;

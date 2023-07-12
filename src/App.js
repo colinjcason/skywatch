@@ -84,7 +84,7 @@ function App() {
         <h1 className='main-temp'>{Math.round(currentTemp)}°</h1>
         <div className='description-container'>
           <p id='description'>{description}</p>
-          {/* <img src={icon} alt='weather condition'/> */}
+          <img src={icon} alt='weather condition'/>
         </div>
         <div className='hi-lo'>
           <p>H:{Math.round(hiTemp)}°</p>

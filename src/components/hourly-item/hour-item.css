@@ -1,5 +1,9 @@
 .hour-item {
   margin: 0px;
+  margin-right: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .formatted-time {
@@ -7,8 +11,7 @@
 }
 
 .rain-percent {
-  margin-top: -5px;
-  font-size: 12px
+  font-size: 12px;
 }
 
 .hour-item img {
