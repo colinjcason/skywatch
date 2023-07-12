@@ -18,6 +18,10 @@ function App() {
   const [theme, setTheme] = useState('light')
 
   useEffect(() => {
+    getWeather()
+  }, [])
+
+  useEffect(() => {
     document.body.className = theme;
   }, [theme]);
 
@@ -51,10 +55,6 @@ function App() {
       })
     }
   }
-
-  useEffect(() => {
-    getWeather()
-  }, [])
 
   const handleChange = (e) => {
     setSearchField(e.target.value)
