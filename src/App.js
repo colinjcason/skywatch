@@ -6,7 +6,6 @@ import Switch from './components/theme-switcher/Switch'
 import './App.css';
 
 function App() {
-  const [weatherData, setWeatherData] = useState([])
   const [location, setLocation] = useState('')
   const [currentTemp, setCurrentTemp] = useState('')
   const [description, setDescription] = useState('')
@@ -17,10 +16,6 @@ function App() {
   const [hourly, setHourly] = useState([])
   const [searchField, setSearchField] = useState('san diego')
   const [theme, setTheme] = useState('light')
-
-  useEffect(() => {
-    getWeather()
-  }, [])
 
   useEffect(() => {
     document.body.className = theme;
@@ -39,7 +34,6 @@ function App() {
         }
       })
       .then(data => {
-        setWeatherData(data)
         setCurrentTemp(data.current.temp_f)
         setDescription(data.current.condition.text)
         setIcon(data.current.condition.icon)
@@ -49,7 +43,6 @@ function App() {
         setHourly(data.forecast.forecastday[0].hour)
         setLocation(data.location.name)
         setSearchField('')
-        console.log(data)
       })
       .catch(error => {
         alert('Please enter a valid city name.')
@@ -58,6 +51,10 @@ function App() {
       })
     }
   }
+
+  useEffect(() => {
+    getWeather()
+  }, [])
 
   const handleChange = (e) => {
     setSearchField(e.target.value)

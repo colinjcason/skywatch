@@ -5,7 +5,7 @@ const ForecastItem = ({ forecastDay }) => {
   const { day, date } = forecastDay
 
   const getDayOfWeek = (day_date) => {
-    const date = new Date(day_date.replace(/-/g, '\/').replace(/T.+/, '')).getDay()
+    const date = new Date(day_date.replace(/-/g, '/').replace(/T.+/, '')).getDay()
     const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     return weekdays[date]
   }
