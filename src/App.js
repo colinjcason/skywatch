@@ -29,7 +29,7 @@ function App() {
     if(searchField === '') {
       alert('Please enter a city for weather data.')
     } else {
-      return fetch(`http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${searchField}&days=3&aqi=no&alerts=yes`)
+      return fetch(`https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${searchField}&days=3&aqi=no&alerts=yes`)
       .then(res => {
         if(!res.ok) {
           throw new Error(res.status)
