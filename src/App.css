@@ -28,6 +28,11 @@ body {
   user-select: none;
 }
 
+.loader {
+  position: relative;
+  top: 250px;
+}
+
 .App {
   display: flex;
   flex-direction: column;
