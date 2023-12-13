@@ -1,0 +1,22 @@
+#sign-in-button {
+  position: absolute;
+  left: 15px;
+  top: 20px;
+  border-radius: .4rem;
+  border: none;
+  padding: .6rem;
+  width: 6rem;
+  color: var(--color-text);
+  background: var(--color-accent);
+  font-size: 1rem;
+  font-weight: 600;
+  transition: transform 0.3s
+}
+
+#sign-in-button:active {
+  transform: translateY(3px)
+}
+
+#sign-in-button:hover {
+  cursor: pointer;
+}

@@ -3,6 +3,7 @@ import SearchBox from './components/search-box/SearchBox';
 import Forecast from './components/forecast-card/Forecast';
 import HourlyForecast from './components/hourly-forecast/HourlyForecast';
 import Switch from './components/theme-switcher/Switch'
+import SignInButton from './components/sign-in-button/SignInButton';
 import { Oval } from 'react-loader-spinner'
 import './App.css';
 
@@ -15,23 +16,13 @@ function App() {
   const [lowTemp, setLowTemp] = useState('')
   const [forecast, setForecast] = useState([])
   const [hourly, setHourly] = useState([])
-  const [searchField, setSearchField] = useState('san diego')
   const [theme, setTheme] = useState('light')
   const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    setTimeout(() => {
-      getWeather()
-    }, 1000)
-  }, [])
-
-  useEffect(() => {
-    document.body.className = theme;
-  }, [theme]);
+  const [searchField, setSearchField] = useState('san diego')
 
   const getWeather = () => {
     setLoading(true)
-      if(searchField === '') {
+      if(!searchField) {
         alert('Please enter a city for weather data.')
       } else {
         return fetch(`https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${searchField}&days=3&aqi=no&alerts=yes`)
@@ -62,6 +53,18 @@ function App() {
       }
   }
 
+  useEffect(() => {
+    setTimeout(() => {
+      getWeather()
+    }, 1000)
+  }, []) 
+  
+
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
+
+
   const handleChange = (e) => {
     setSearchField(e.target.value)
   }
@@ -71,15 +74,19 @@ function App() {
   }
 
   const handleThemeSelection = () => {
-    if (theme === 'dark') {
-      setTheme('light');
-    } else {
+    if (theme === 'light') {
       setTheme('dark');
+    } else {
+      setTheme('light');
     }
   }
 
   return (
     <div className={`App ${theme}`}>
+      {/* Sign in button */}
+      <SignInButton />
+
+      {/* Loading animation */}
       {loading ? 
         <Oval
           height={160}
@@ -93,7 +100,11 @@ function App() {
           strokeWidth={2.5}
           strokeWidthSecondary={2.5}
         /> : 
+
         <>
+        
+
+        {/* Light and dark theme switch */}
           <Switch handleThemeSelection={handleThemeSelection} theme={theme} />
   
           <div className='stats'> 

@@ -3,9 +3,13 @@ import './theme-switch.css'
 
 const Switch = ({ handleThemeSelection, theme }) => {
   return (
-    <label class="switch">
-      <input type="checkbox" onClick={handleThemeSelection} />
-      <span class="slider round"></span>
+    <label className="switch">
+      <input 
+        type="checkbox" 
+        onClick={handleThemeSelection} 
+        defaultChecked={theme === 'dark' ? true : false}
+      />
+      <span className="slider round"></span>
       <p>{theme.toUpperCase()}</p>
     </label>
   )

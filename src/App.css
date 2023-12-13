@@ -3,6 +3,7 @@
 :root,
 .dark {
   --color-background: #000000;
+  /* or #111827? */
   --color-text: #f8fafc; 
   --color-accent: linear-gradient(90deg, rgb(123, 91, 199) 0%, rgb(234, 56, 141) 100%);
 }
