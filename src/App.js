@@ -3,7 +3,7 @@ import SearchBox from './components/search-box/SearchBox';
 import Forecast from './components/forecast-card/Forecast';
 import HourlyForecast from './components/hourly-forecast/HourlyForecast';
 import Switch from './components/theme-switcher/Switch'
-import SignInButton from './components/sign-in-button/SignInButton';
+// import SignInButton from './components/sign-in-button/SignInButton';
 import { Oval } from 'react-loader-spinner'
 import './App.css';
 
@@ -24,6 +24,7 @@ function App() {
     setLoading(true)
       if(!searchField) {
         alert('Please enter a city for weather data.')
+        setLoading(false)
       } else {
         return fetch(`https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${searchField}&days=3&aqi=no&alerts=yes`)
         .then(res => {
@@ -84,7 +85,7 @@ function App() {
   return (
     <div className={`App ${theme}`}>
       {/* Sign in button */}
-      <SignInButton />
+      {/* <SignInButton /> */}
 
       {/* Loading animation */}
       {loading ? 
