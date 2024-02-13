@@ -1,28 +1,20 @@
 import React, { useContext } from 'react'
 import './sign-in-button.css'
-import { signInWithGoogle, createUserDocumentFromAuth, signOutUser } from '../../utils/firebase'
+import { signInWithGoogle, signOutUser } from '../../utils/firebase'
 import { UserContext } from '../../contexts/user.context'
 
 const SignInButton = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext)
+  const { currentUser } = useContext(UserContext)
 
   const signInWithGooglePopup = async () => {
-    const { user } = await signInWithGoogle()
-    setCurrentUser(user)
-    await createUserDocumentFromAuth(user)
-    console.log(user)
-  }
-
-  const signOutHandler = async () => {
-    await signOutUser();
-    setCurrentUser(null)
+    await signInWithGoogle()
   }
 
   return (
       currentUser ? (
         <button 
           id='sign-in-button'
-          onClick={signOutHandler}
+          onClick={signOutUser}
         >
           Sign out
         </button>
