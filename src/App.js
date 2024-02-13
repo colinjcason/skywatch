@@ -3,7 +3,7 @@ import SearchBox from './components/search-box/SearchBox';
 import Forecast from './components/forecast-card/Forecast';
 import HourlyForecast from './components/hourly-forecast/HourlyForecast';
 import Switch from './components/theme-switcher/Switch'
-// import SignInButton from './components/sign-in-button/SignInButton';
+import SignInButton from './components/sign-in-button/SignInButton';
 import { Oval } from 'react-loader-spinner'
 import './App.css';
 
@@ -85,7 +85,7 @@ function App() {
   return (
     <div className={`App ${theme}`}>
       {/* Sign in button */}
-      {/* <SignInButton /> */}
+      <SignInButton />
 
       {/* Loading animation */}
       {loading ? 

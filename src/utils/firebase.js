@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth'
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -12,7 +12,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const firebaseapp = initializeApp(firebaseConfig);
 
 // prompt user to select sign in account 
 const googleProvider = new GoogleAuthProvider()
@@ -49,3 +49,5 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   // is user already exists, just return the user reference
   return userDocRef
 }
+
+export const signOutUser = async () => await signOut(auth)
