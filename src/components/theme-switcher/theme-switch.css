@@ -65,3 +65,7 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+#theme {
+  color: var(--color-accent);
+}

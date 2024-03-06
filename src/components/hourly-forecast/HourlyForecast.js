@@ -7,7 +7,7 @@ const HourlyForecast = ({ hourly }) => {
     <div>
       <div className='hourly-container'>
         {hourly.map(hour => (
-          <HourItem hour={hour} key={hour.id}/>
+          <HourItem hour={hour} key={hour.id} />
         ))}
       </div>
     </div>

@@ -10,7 +10,7 @@ const Switch = ({ handleThemeSelection, theme }) => {
         defaultChecked={theme === 'dark' ? true : false}
       />
       <span className="slider round"></span>
-      <p>{theme.toUpperCase()}</p>
+      <p id="theme">{theme.toUpperCase()}</p>
     </label>
   )
 }

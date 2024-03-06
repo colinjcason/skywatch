@@ -22,13 +22,13 @@ function App() {
 
   const getWeather = () => {
     setLoading(true)
-      if(!searchField) {
-        alert('Please enter a city for weather data.')
-        setLoading(false)
-      } else {
-        return fetch(`https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${searchField}&days=3&aqi=no&alerts=yes`)
+    if (!searchField) {
+      alert('Please enter a city for weather data.')
+      setLoading(false)
+    } else {
+      return fetch(`https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${searchField}&days=3&aqi=no&alerts=yes`)
         .then(res => {
-          if(!res.ok) {
+          if (!res.ok) {
             throw new Error(res.status)
           } else {
             return res.json()
@@ -51,15 +51,15 @@ function App() {
           setSearchField('')
           console.error('There was a problem with the Fetch operation:', error)
         })
-      }
+    }
   }
 
   useEffect(() => {
     setTimeout(() => {
       getWeather()
     }, 1000)
-  }, []) 
-  
+  }, [])
+
 
   useEffect(() => {
     document.body.className = theme;
@@ -71,7 +71,8 @@ function App() {
   }
 
   const handleSearch = () => {
-      getWeather()
+
+    getWeather()
   }
 
   const handleThemeSelection = () => {
@@ -84,11 +85,8 @@ function App() {
 
   return (
     <div className={`App ${theme}`}>
-      {/* Sign in button */}
-      <SignInButton />
-
       {/* Loading animation */}
-      {loading ? 
+      {loading ?
         <Oval
           height={160}
           width={160}
@@ -100,36 +98,37 @@ function App() {
           secondaryColor={theme === 'light' ? "#f0e5e4" : 'rgb(123, 91, 199)'}
           strokeWidth={2.5}
           strokeWidthSecondary={2.5}
-        /> : 
+        /> :
 
         <>
-        
+          {/* Sign in button */}
+          <SignInButton />
 
-        {/* Light and dark theme switch */}
+          {/* Light and dark theme switch */}
           <Switch handleThemeSelection={handleThemeSelection} theme={theme} />
-  
-          <div className='stats'> 
+
+          <div className='stats'>
             <h2 className='location'>{location}</h2>
             <h1 className='main-temp'>{Math.round(currentTemp)}°</h1>
             <div className='description-container'>
               <p id='description'>{description}</p>
-              <img src={icon} alt='weather condition'/>
+              <img src={icon} alt='weather condition' />
             </div>
             <div className='hi-lo'>
               <p>H:{Math.round(hiTemp)}°</p>
               <p>L:{Math.round(lowTemp)}°</p>
             </div>
           </div>
-  
-          <SearchBox 
+
+          <SearchBox
             searchField={searchField}
             handleChange={handleChange}
             handleSearch={handleSearch}
           />
-    
+
           <HourlyForecast hourly={hourly} />
-    
-          <Forecast forecast={forecast} />        
+
+          <Forecast forecast={forecast} />
         </>
       }
     </div>
