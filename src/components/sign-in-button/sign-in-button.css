@@ -6,7 +6,7 @@
   border: none;
   padding: .5rem;
   width: 5rem;
-  color: var(--color-text);
+  color: var(--color-background);
   background: var(--color-accent);
   font-size: 1rem;
   font-weight: 600;

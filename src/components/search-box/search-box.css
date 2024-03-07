@@ -16,12 +16,16 @@
   text-align: center;
 }
 
+.search-box-container ::placeholder {
+  color: var(--color-background);
+}
+
 .search-box-container button {
   border-radius: .4rem;
   border: none;
   padding: .6rem;
   width: 6rem;
-  color: var(--color-text);
+  color: var(--color-background);
   background: var(--color-accent);
   font-size: 1rem;
   font-weight: 600;

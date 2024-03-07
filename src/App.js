@@ -84,13 +84,13 @@ function App() {
   }
 
   return (
-    <div className={`App ${theme}`}>
+    <>
       {/* Loading animation */}
       {loading ?
         <Oval
           height={160}
           width={160}
-          color={theme === 'light' ? '#f8fafc' : 'rgb(234, 56, 141)'}
+          color={theme === 'light' ? '#2b2e4a' : 'rgb(234, 56, 141)'}
           wrapperStyle={{}}
           wrapperClass="loader"
           visible={true}
@@ -100,7 +100,7 @@ function App() {
           strokeWidthSecondary={2.5}
         /> :
 
-        <>
+        <div className={`App ${theme}`}>
           {/* Sign in button */}
           <SignInButton />
 
@@ -126,12 +126,15 @@ function App() {
             handleSearch={handleSearch}
           />
 
-          <HourlyForecast hourly={hourly} />
+          <div className='grid-forecast'>
+            <HourlyForecast hourly={hourly} />
 
-          <Forecast forecast={forecast} />
-        </>
+            <Forecast forecast={forecast} />
+          </div>
+
+        </div>
       }
-    </div>
+    </>
   );
 }
 

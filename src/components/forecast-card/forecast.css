@@ -1,5 +1,4 @@
 .forecast-container {
-  background-color: #1e1633;
   max-width: 320px;
   max-height: 200px;
   border-radius: .4rem;
@@ -18,6 +17,11 @@ h4 {
   -moz-text-fill-color: transparent;
 }
 
+.light h4 {
+  -webkit-text-fill-color: var(--color-text);
+  -moz-text-fill-color: var(--color-text);
+}
+
 .forecast-days-container {
   display: flex;
   justify-content: space-evenly;
@@ -25,7 +29,5 @@ h4 {
 }
 
 @media screen and (min-width: 768px) {
-  .forecast-container {
-    min-width: 450px;
-  }
+  
 }
