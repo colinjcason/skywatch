@@ -50,7 +50,7 @@ body {
   margin: 20px auto;
   border-radius: 10px;
   box-shadow: var(--box-shadow);
-  background-color: var(--container-background);
+  /* background-color: var(--container-background); */
 }
 
 .App p {

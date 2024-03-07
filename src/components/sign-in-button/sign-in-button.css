@@ -4,11 +4,11 @@
   top: 20px;
   border-radius: .4rem;
   border: none;
-  padding: .5rem;
-  width: 5rem;
+  padding: .4rem;
+  width: 4.2rem;
   color: var(--color-background);
   background: var(--color-accent);
-  font-size: 1rem;
+  font-size: .9rem;
   font-weight: 600;
   transition: transform 0.3s;
 }
