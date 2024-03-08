@@ -10,6 +10,7 @@
   border-radius: .4rem;
   border: none;
   background-color: var(--color-text);
+  color: var(--color-background);
   margin-bottom: .5rem;
   width: 15rem;
   font-size: 1rem;

@@ -11,7 +11,7 @@ const HourItem = ({ hour }) => {
       <p className='formatted-time'>{formattedTime(hour.time_epoch)}</p>
       <img src={hour.condition.icon} alt='icon' />
       <p className='rain-percent'>
-        {hour.chance_of_rain > 0 ? hour.chance_of_rain + '%' : null}
+        {hour.chance_of_rain > 0 ? hour.chance_of_rain + '%' : ''}
       </p>
       <p>{Math.round(hour.temp_f)}°</p>
     </div>
