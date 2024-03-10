@@ -16,7 +16,7 @@ function App() {
   const [lowTemp, setLowTemp] = useState('')
   const [forecast, setForecast] = useState([])
   const [hourly, setHourly] = useState([])
-  const [theme, setTheme] = useState('light')
+  const [theme, setTheme] = useState('dark')
   const [loading, setLoading] = useState(true)
   const [searchField, setSearchField] = useState('san diego')
 
@@ -118,15 +118,16 @@ function App() {
               <p>H:{Math.round(hiTemp)}°</p>
               <p>L:{Math.round(lowTemp)}°</p>
             </div>
+            <SearchBox
+              searchField={searchField}
+              handleChange={handleChange}
+              handleSearch={handleSearch}
+            />
           </div>
 
-          <SearchBox
-            searchField={searchField}
-            handleChange={handleChange}
-            handleSearch={handleSearch}
-          />
 
-          <div className='grid-forecast'>
+
+          <div className='forecast'>
             <HourlyForecast hourly={hourly} />
 
             <Forecast forecast={forecast} />

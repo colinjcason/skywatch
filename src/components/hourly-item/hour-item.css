@@ -2,6 +2,7 @@
   margin: 0 8px 0 8px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   min-height: 110px;
 }
 
@@ -11,9 +12,12 @@
 
 .rain-percent {
   font-size: 12px;
-  min-height: 17px;
 }
 
 .hour-item img {
   width: 50px;
+}
+
+p:last-child {
+  font-size: 18px;
 }
