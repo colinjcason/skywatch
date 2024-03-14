@@ -12,14 +12,12 @@ const SignInButton = () => {
 
   return (
     currentUser ? (
-      <div className='profile-pic'>
         <div
           id='sign-in-button'
           onClick={signOutUser}
         >
           Sign out
         </div>
-      </div>
     ) : (
       <div
         id='sign-in-button'
