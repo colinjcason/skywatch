@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import SearchBox from './components/search-box/SearchBox';
 import Forecast from './components/forecast-card/Forecast';
 import HourlyForecast from './components/hourly-forecast/HourlyForecast';
@@ -6,8 +6,11 @@ import Switch from './components/theme-switcher/Switch'
 import SignInButton from './components/sign-in-button/SignInButton';
 import { Oval } from 'react-loader-spinner'
 import './App.css';
+import { UserContext } from './contexts/user.context';
 
 function App() {
+  const { currentUser } = useContext(UserContext);
+
   const [location, setLocation] = useState('')
   const [currentTemp, setCurrentTemp] = useState('')
   const [description, setDescription] = useState('')
@@ -16,7 +19,7 @@ function App() {
   const [lowTemp, setLowTemp] = useState('')
   const [forecast, setForecast] = useState([])
   const [hourly, setHourly] = useState([])
-  const [theme, setTheme] = useState('dark')
+  const [theme, setTheme] = useState('light')
   const [loading, setLoading] = useState(true)
   const [searchField, setSearchField] = useState('san diego')
 
@@ -71,7 +74,6 @@ function App() {
   }
 
   const handleSearch = () => {
-
     getWeather()
   }
 
@@ -102,7 +104,7 @@ function App() {
 
         <div className={`App ${theme}`}>
           {/* Sign in button */}
-          <SignInButton />
+          <SignInButton />          
 
           {/* Light and dark theme switch */}
           <Switch handleThemeSelection={handleThemeSelection} theme={theme} />

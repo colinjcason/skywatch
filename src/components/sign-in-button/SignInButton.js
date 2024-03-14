@@ -11,21 +11,23 @@ const SignInButton = () => {
   }
 
   return (
-      currentUser ? (
-        <button 
+    currentUser ? (
+      <div className='profile-pic'>
+        <div
           id='sign-in-button'
           onClick={signOutUser}
         >
           Sign out
-        </button>
-      ) : (
-        <button 
-          id='sign-in-button'
-          onClick={signInWithGooglePopup}
-        >
-          Sign in
-        </button>
-      )    
+        </div>
+      </div>
+    ) : (
+      <div
+        id='sign-in-button'
+        onClick={signInWithGooglePopup}
+      >
+        Sign in
+      </div>
+    )
   )
 }
 

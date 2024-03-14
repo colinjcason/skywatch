@@ -2,15 +2,17 @@
   position: absolute;
   left: 10px;
   top: 20px;
-  border-radius: .4rem;
   border: none;
   padding: .5rem;
   width: 6rem;
-  color: var(--color-background);
-  background: var(--color-accent);
+  color: var(--color-text);
   font-size: 1rem;
   font-weight: 600;
   transition: transform 0.3s;
+}
+
+.dark #sign-in-button {
+  background: none;
 }
 
 #sign-in-button:active {
@@ -20,3 +22,15 @@
 #sign-in-button:hover {
   cursor: pointer;
 }
+
+/* .profile-pic {
+  position: absolute;
+  left: 10px;
+  top: 20px;
+} */
+
+/* .profile-pic img {
+  width: 50px;
+  border-radius: 50%;
+  margin-bottom: -8px;
+} */
