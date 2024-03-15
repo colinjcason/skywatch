@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import './sign-in-button.css'
-import { signInWithGoogle, signOutUser } from '../../utils/firebase'
 import { UserContext } from '../../contexts/user.context'
+import { signInWithGoogle, signOutUser } from '../../utils/firebase'
+import './sign-in-button.css'
 
 const SignInButton = () => {
   const { currentUser } = useContext(UserContext)

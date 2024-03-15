@@ -4,6 +4,7 @@ import Forecast from './components/forecast-card/Forecast';
 import HourlyForecast from './components/hourly-forecast/HourlyForecast';
 import Switch from './components/theme-switcher/Switch'
 import SignInButton from './components/sign-in-button/SignInButton';
+import Sidebar from './components/sidebar/Sidebar';
 import { Oval } from 'react-loader-spinner'
 import './App.css';
 import { UserContext } from './contexts/user.context';
@@ -87,6 +88,8 @@ function App() {
 
   return (
     <>
+      <Sidebar />
+
       {/* Loading animation */}
       {loading ?
         <Oval
@@ -102,9 +105,10 @@ function App() {
           strokeWidthSecondary={2.5}
         /> :
 
+
         <div className={`App ${theme}`}>
           {/* Sign in button */}
-          <SignInButton />          
+          {/* <SignInButton />           */}
 
           {/* Light and dark theme switch */}
           <Switch handleThemeSelection={handleThemeSelection} theme={theme} />

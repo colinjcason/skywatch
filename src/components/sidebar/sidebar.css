@@ -1,0 +1,10 @@
+.sidebar-container {
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+.menu-icon {
+  position: absolute;
+  top: 10px;
+  left: 30px;
+}

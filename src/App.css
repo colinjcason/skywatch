@@ -4,7 +4,7 @@
 .dark {
   transition: .2s ease;
   --shadow-color: 270deg 2% 49%;
-  --color-background: #000000;
+  --color-background: #101418;
   --color-text: #f8fafc;
   --container-background: #111827;
   --color-accent: linear-gradient(90deg, rgb(123, 91, 199) 0%, rgb(234, 56, 141) 100%);
