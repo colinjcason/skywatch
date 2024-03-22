@@ -71,6 +71,7 @@ export const addToFavorites = async (userAuth, city) => {
 
     if (querySnapshot.empty) {
       await addDoc(favoritesRef, { city });
+      alert('City added to favorites!');
       console.log('City added to favorites:', city);
     } else {
       alert('City already saved to your Favorites!');

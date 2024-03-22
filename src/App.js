@@ -18,7 +18,7 @@ function App() {
   const [theme, setTheme] = useState('light')
   const [searchField, setSearchField] = useState('')
   const [city, setCity] = useState('san diego')
-  const { data, error, loading } = useGetWeather(city)
+  const { data, isError, isLoading } = useGetWeather(city)
 
   useEffect(() => {
     document.body.className = theme;
@@ -50,12 +50,14 @@ function App() {
     currentUser ? addToFavorites(currentUser, city) : alert('Please sign in to use save function.')
   }
 
+  if (isError) return <Box>Error fetching data</Box>;
+
   return (
     <>
       <Sidebar updateCity={updateCity} />
 
       {/* Loading animation */}
-      {loading ?
+      {isLoading ?
         <Oval
           height={160}
           width={160}
