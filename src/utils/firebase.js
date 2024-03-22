@@ -21,7 +21,15 @@ googleProvider.setCustomParameters({
 })
 
 export const auth = getAuth()
-export const signInWithGoogle = () => signInWithPopup(auth, googleProvider)
+export const signInWithGoogle = () => {
+  signInWithPopup(auth, googleProvider)
+    .then(result => {
+      const user = result.user
+    })
+    .catch(error => {
+      return 
+    })
+}
 
 export const db = getFirestore(app)
 

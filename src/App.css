@@ -136,7 +136,7 @@ body {
     min-width: fit-content;
     max-width: 50vw;
     box-shadow: var(--box-shadow);
-    padding-bottom: 1rem;
+    padding: 1rem;
     margin-top: 20vh;
   }
 
