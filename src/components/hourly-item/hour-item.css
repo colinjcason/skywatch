@@ -18,6 +18,6 @@
   width: 50px;
 }
 
-p:last-child {
+.hour-item p:last-child {
   font-size: 18px;
 }

@@ -8,7 +8,7 @@ const Forecast = ({ forecast }) => {
       <h4>3-DAY FORECAST</h4>
       <div className='forecast-days-container'>
         {forecast.map(forecastDay => (
-          <ForecastItem forecastDay={forecastDay} key={forecast.id}/>
+          <ForecastItem forecastDay={forecastDay} key={forecastDay.date}/>
         ))}
       </div>
     </div>

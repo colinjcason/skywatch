@@ -3,7 +3,7 @@ import './search-box.css'
 
 const SearchBox = ({ searchField, handleSearch, handleChange }) => {
   return (
-    <div className='search-box-container'>
+    <form className='search-box-container'>
       <input 
           type='search'
           placeholder='Enter location'
@@ -11,8 +11,8 @@ const SearchBox = ({ searchField, handleSearch, handleChange }) => {
           onChange={handleChange}
           name='searchField'
         />
-        <button onClick={handleSearch}>Search</button>
-    </div>
+        <button onClick={handleSearch} type='submit'>Search</button>
+    </form>
   )
 }
 

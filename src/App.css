@@ -19,7 +19,7 @@
   --box-shadow:
     -0.1px 0.3px 0.3px hsl(var(--shadow-color) / 1),
     -0.9px 2.8px 2.8px -1.2px hsl(var(--shadow-color) / 0.97),
-    -3.5px 10.6px 10.6px -2.4px hsl(var(--shadow-color) / 0.79),
+    -3.5px .6px 10.6px -2.4px hsl(var(--shadow-color) / 0.79),
     -10.2px 30.6px 30.7px -3.6px hsl(var(--shadow-color) / 0.61);
 }
 
@@ -113,8 +113,11 @@ body {
   margin: 5px;
 }
 
-@media screen and (min-width: 768px) {
+#favorite-icon {
+  color: var(--color-text);
+}
 
+@media screen and (min-width: 768px) {
   body {
     height: 100vh;
     width: 100vw;
@@ -133,7 +136,7 @@ body {
     min-width: fit-content;
     max-width: 50vw;
     box-shadow: var(--box-shadow);
-    padding: 1.5rem;
+    padding-bottom: 1rem;
     margin-top: 20vh;
   }
 

@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
@@ -12,11 +12,33 @@ import Avatar from '@mui/material/Avatar';
 import { UserContext } from '../../contexts/user.context'
 import { signInWithGoogle, signOutUser } from '../../utils/firebase'
 import './sidebar.css'
-import { ListItemAvatar, Typography } from '@mui/material';
+import { useGetWeather } from '../../hooks/useGetWeather';
+import { fetchFavorites, deleteFavoriteCity, listenForFavoritesChanges } from '../../utils/firebase';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
-const Sidebar = () => {
+const Sidebar = ({ updateCity }) => {
   const { currentUser } = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [city, setCity] = useState('')
+  const { loading, data, error } = useGetWeather(city)
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    const getUserFavorites = async () => {
+      try {
+        const favorites = await fetchFavorites(currentUser)
+        setFavorites(favorites);
+
+        const unsubscribe = listenForFavoritesChanges(currentUser, setFavorites);
+
+        return () => unsubscribe();
+      } catch (error) {
+        console.error('Error fetching favorites:', error);
+      }
+    }
+
+    getUserFavorites();
+  }, [currentUser]);
 
   const signInWithGooglePopup = async () => {
     await signInWithGoogle()
@@ -26,15 +48,20 @@ const Sidebar = () => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
+    
     setIsOpen(open);
   };
+
+  const handleUpdate = (city) => {
+    setCity(city);
+    updateCity(city)
+  }
 
   const list = () => (
     <Box
       className='sidebar-container'
       display='flex'
       alignItems='center'
-      // justifyContent='center'
       minHeight='100%'
       paddingTop='10px'
       flexDirection='column'
@@ -51,13 +78,25 @@ const Sidebar = () => {
           />
 
           <List>
-            {['Phoenix', 'Dallas', 'New York', 'Big Bear'].map(text => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
+            {favorites ? (
+              favorites.length > 0 ?
+                favorites.map((favorite) => (
+                  <ListItem key={favorite.cityId} disablePadding>
+                    <ListItemButton onClick={() => handleUpdate(favorite.city)}>
+                      <ListItemText primary={favorite.city.toUpperCase()} />
+                      <DeleteOutlineOutlinedIcon 
+                      sx={{ marginLeft: '20px', fontSize: '20px' }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        deleteFavoriteCity(currentUser, favorite.cityId)}}
+                       />
+                    </ListItemButton>
+                  </ListItem>
+                )) :
+                <Box>No saved cities.</Box>
+            ) : (
+              <Box>Loading...</Box>
+            )}
           </List>
 
           <Button

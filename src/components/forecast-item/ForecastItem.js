@@ -14,7 +14,7 @@ const ForecastItem = ({ forecastDay }) => {
     <div className='forecast-day'>
       {getDayOfWeek(date)}
       <img src={day.condition.icon} alt='weather condition' />
-      {Math.round(day.avgtemp_f)}°
+      <p>{Math.round(day.avgtemp_f)}°</p>
     </div>
   )
 }

@@ -1,94 +1,58 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useCallback } from 'react'
 import SearchBox from './components/search-box/SearchBox';
 import Forecast from './components/forecast-card/Forecast';
 import HourlyForecast from './components/hourly-forecast/HourlyForecast';
 import Switch from './components/theme-switcher/Switch'
-import SignInButton from './components/sign-in-button/SignInButton';
 import Sidebar from './components/sidebar/Sidebar';
 import { Oval } from 'react-loader-spinner'
 import './App.css';
 import { UserContext } from './contexts/user.context';
+import { useGetWeather } from './hooks/useGetWeather';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import IconButton from '@mui/material/IconButton';
+import { Box } from '@mui/material';
+import { addToFavorites } from './utils/firebase';
 
 function App() {
   const { currentUser } = useContext(UserContext);
-
-  const [location, setLocation] = useState('')
-  const [currentTemp, setCurrentTemp] = useState('')
-  const [description, setDescription] = useState('')
-  const [icon, setIcon] = useState('')
-  const [hiTemp, setHiTemp] = useState('')
-  const [lowTemp, setLowTemp] = useState('')
-  const [forecast, setForecast] = useState([])
-  const [hourly, setHourly] = useState([])
   const [theme, setTheme] = useState('light')
-  const [loading, setLoading] = useState(true)
-  const [searchField, setSearchField] = useState('san diego')
-
-  const getWeather = () => {
-    setLoading(true)
-    if (!searchField) {
-      alert('Please enter a city for weather data.')
-      setLoading(false)
-    } else {
-      return fetch(`https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${searchField}&days=3&aqi=no&alerts=yes`)
-        .then(res => {
-          if (!res.ok) {
-            throw new Error(res.status)
-          } else {
-            return res.json()
-          }
-        })
-        .then(data => {
-          setCurrentTemp(data.current.temp_f)
-          setDescription(data.current.condition.text)
-          setIcon(data.current.condition.icon)
-          setHiTemp(data.forecast.forecastday[0].day.maxtemp_f)
-          setLowTemp(data.forecast.forecastday[0].day.mintemp_f)
-          setForecast(data.forecast.forecastday)
-          setHourly(data.forecast.forecastday[0].hour)
-          setLocation(data.location.name)
-          setSearchField('')
-          setLoading(false)
-        })
-        .catch(error => {
-          alert('Please enter a valid city name.')
-          setSearchField('')
-          console.error('There was a problem with the Fetch operation:', error)
-        })
-    }
-  }
-
-  useEffect(() => {
-    setTimeout(() => {
-      getWeather()
-    }, 1000)
-  }, [])
-
+  const [searchField, setSearchField] = useState('')
+  const [city, setCity] = useState('san diego')
+  const { data, error, loading } = useGetWeather(city)
 
   useEffect(() => {
     document.body.className = theme;
   }, [theme]);
 
-
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     setSearchField(e.target.value)
-  }
+  }, [])
 
-  const handleSearch = () => {
-    getWeather()
-  }
-
-  const handleThemeSelection = () => {
-    if (theme === 'light') {
-      setTheme('dark');
+  const handleSearch = (e) => {
+    e.preventDefault()
+    if (!searchField) {
+      alert('Please enter a location to search')
     } else {
-      setTheme('light');
+      setCity(searchField);
+      setSearchField('')
     }
+  }
+
+  const handleThemeSelection = useCallback(() => {
+    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
+  }, [])
+
+  const updateCity = (newCity) => {
+    setCity(newCity); // Update the city state
+  };
+
+  const handleAddToFavorites = () => {
+    currentUser ? addToFavorites(currentUser, city) : alert('Please sign in to use save function.')
   }
 
   return (
     <>
-      <Sidebar />
+      <Sidebar updateCity={updateCity} />
 
       {/* Loading animation */}
       {loading ?
@@ -108,22 +72,41 @@ function App() {
 
         <div className={`App ${theme}`}>
           {/* Sign in button */}
-          {/* <SignInButton />           */}
+          {/* <SignInButton /> */}
 
           {/* Light and dark theme switch */}
           <Switch handleThemeSelection={handleThemeSelection} theme={theme} />
 
           <div className='stats'>
-            <h2 className='location'>{location}</h2>
-            <h1 className='main-temp'>{Math.round(currentTemp)}°</h1>
-            <div className='description-container'>
-              <p id='description'>{description}</p>
-              <img src={icon} alt='weather condition' />
-            </div>
-            <div className='hi-lo'>
-              <p>H:{Math.round(hiTemp)}°</p>
-              <p>L:{Math.round(lowTemp)}°</p>
-            </div>
+            {data && (
+              <>
+                <h2 className='location'>{data.location.name}</h2>
+                <h1 className='main-temp'>{Math.round(data.current.temp_f)}°</h1>
+                <div className='description-container'>
+                  <p id='description'>{data.current.condition.text}</p>
+                  <img src={data.current.condition.icon} alt='weather condition' />
+                </div>
+                <div className='hi-lo'>
+                  <p>H:{Math.round(data.forecast.forecastday[0].day.maxtemp_f)}°</p>
+                  <p>L:{Math.round(data.forecast.forecastday[0].day.mintemp_f)}°</p>
+                </div>
+              </>
+            )}
+
+            <Box
+              display='flex'
+              alignItems='end'
+              justifyContent='center'
+            >
+              <IconButton onClick={handleAddToFavorites}>
+                <FavoriteBorderIcon
+                  id='favorite-icon'
+                  style={{ marginBottom: '-10px' }}
+                />
+              </IconButton>
+              <Box sx={{ fontWeight: 'normal', textAlign: 'center' }}>Favorite</Box>
+            </Box>
+
             <SearchBox
               searchField={searchField}
               handleChange={handleChange}
@@ -131,14 +114,14 @@ function App() {
             />
           </div>
 
-
-
           <div className='forecast'>
-            <HourlyForecast hourly={hourly} />
-
-            <Forecast forecast={forecast} />
+            {data && (
+              <>
+                <HourlyForecast hourly={data.forecast.forecastday[0].hour} />
+                <Forecast forecast={data.forecast.forecastday} />
+              </>
+            )}
           </div>
-
         </div>
       }
     </>
