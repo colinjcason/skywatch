@@ -32,13 +32,13 @@ body::-webkit-scrollbar {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  text-align: center;
 }
 
 body {
   background-color: var(--color-background);
   color: var(--color-text);
   user-select: none;
+  text-align: center;
 }
 
 .loader {
@@ -112,6 +112,11 @@ body {
 
 #favorite-icon {
   color: var(--color-text);
+}
+
+.dark .MuiInputBase-root {
+  color: var(--color-background);
+  background: var(--color-text);
 }
 
 @media screen and (min-width: 768px) {

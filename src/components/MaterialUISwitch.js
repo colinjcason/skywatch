@@ -1,13 +1,13 @@
 import { styled } from '@mui/material/styles';
-import Switch, { SwitchProps } from '@mui/material/Switch';
+import Switch from '@mui/material/Switch';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
   padding: 7,
   position: 'absolute',
-  right: '20px',
-  top: '20px',
+  right: 10,
+  top: 10,
   '& .MuiSwitch-switchBase': {
     margin: 1,
     padding: 0,

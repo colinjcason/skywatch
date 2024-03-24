@@ -8,8 +8,8 @@ import { UserContext } from './contexts/user.context';
 import { useGetWeather } from './hooks/useGetWeather';
 import { Box } from '@mui/material';
 import { addToFavorites } from './utils/firebase';
-import Weather from './components/weather/Weather';
-import MaterialUISwitch from './components/theme-switcher/Switch';
+import Weather from './components/Weather';
+import MaterialUISwitch from './components/MaterialUISwitch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 function App() {
@@ -77,7 +77,7 @@ function App() {
             control={<MaterialUISwitch
               sx={{ m: 1 }}
               onClick={handleThemeSelection}
-              // className='switch'
+            // className='switch'
             />}
           />
 

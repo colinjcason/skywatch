@@ -12,15 +12,12 @@ import Avatar from '@mui/material/Avatar';
 import { UserContext } from '../../contexts/user.context'
 import { signInWithGoogle, signOutUser } from '../../utils/firebase'
 import './sidebar.css'
-import { useGetWeather } from '../../hooks/useGetWeather';
 import { fetchFavorites, deleteFavoriteCity, listenForFavoritesChanges } from '../../utils/firebase';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 const Sidebar = ({ updateCity }) => {
   const { currentUser } = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
-  const [city, setCity] = useState('')
-  const { loading, data, error } = useGetWeather(city)
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
@@ -48,68 +45,79 @@ const Sidebar = ({ updateCity }) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-    
+
     setIsOpen(open);
   };
 
   const handleUpdate = (city) => {
-    setCity(city);
     updateCity(city)
   }
 
   const list = () => (
     <Box
       className='sidebar-container'
-      display='flex'
-      alignItems='center'
       minHeight='100%'
       paddingTop='10px'
-      flexDirection='column'
       sx={{ width: 200 }}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
       {currentUser ? (
-        <>
+        <Box
+          display='flex'
+          flexDirection='column'
+          alignItems='center'
+          height='100%'
+        >
           <Avatar
             alt='user avatar'
             src={currentUser.photoURL}
           />
 
-          <List>
-            {favorites ? (
-              favorites.length > 0 ?
-                favorites.map((favorite) => (
-                  <ListItem key={favorite.cityId} disablePadding>
-                    <ListItemButton onClick={() => handleUpdate(favorite.city)}>
-                      <ListItemText primary={favorite.city.toUpperCase()} />
-                      <DeleteOutlineOutlinedIcon 
-                      sx={{ marginLeft: '20px', fontSize: '20px' }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        deleteFavoriteCity(currentUser, favorite.cityId)}}
-                       />
-                    </ListItemButton>
-                  </ListItem>
-                )) :
-                <Box>No saved cities.</Box>
-            ) : (
-              <Box>Loading...</Box>
-            )}
-          </List>
+          <Box sx={{ overflowY: 'auto', flexGrow: 1 }}>
+            <List>
+              {favorites ? (
+                favorites.length > 0 ?
+                  favorites.map((favorite) => (
+                    <ListItem key={favorite.cityId} disablePadding>
+                      <ListItemButton onClick={() => handleUpdate(favorite.city)} sx={{ textAlign: 'left' }}>
+                        <ListItemText primary={favorite.city.toUpperCase()} sx={{ textAlign: 'left' }} />
+                      </ListItemButton>
+                      <DeleteOutlineOutlinedIcon
+                        sx={{
+                          fontSize: '20px',
+                          marginLeft: '20px',
+                          textAlign: 'center'
+                        }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          deleteFavoriteCity(currentUser, favorite.cityId)
+                        }}
+                      />
+                    </ListItem>
+                  )) :
+                  <Box>No saved cities.</Box>
+              ) : (
+                <Box>Loading...</Box>
+              )}
+            </List>
+          </Box>
 
           <Button
             variant='outline'
-            onClick={signOutUser}>
+            onClick={signOutUser}
+            sx={{ mt: 'auto' }}
+          >
             Sign Out
           </Button>
-        </>
+        </Box>
       ) : (
         <List>
           <Button
             variant='outline'
-            onClick={signInWithGooglePopup}>
+            onClick={signInWithGooglePopup}
+          >
             Sign In
           </Button>
         </List>
