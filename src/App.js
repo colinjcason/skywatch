@@ -1,17 +1,16 @@
 import { useState, useEffect, useContext, useCallback } from 'react'
-import SearchBox from './components/search-box/SearchBox';
 import Forecast from './components/forecast-card/Forecast';
 import HourlyForecast from './components/hourly-forecast/HourlyForecast';
-import Switch from './components/theme-switcher/Switch'
 import Sidebar from './components/sidebar/Sidebar';
 import { Oval } from 'react-loader-spinner'
 import './App.css';
 import { UserContext } from './contexts/user.context';
 import { useGetWeather } from './hooks/useGetWeather';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import IconButton from '@mui/material/IconButton';
 import { Box } from '@mui/material';
 import { addToFavorites } from './utils/firebase';
+import Weather from './components/weather/Weather';
+import MaterialUISwitch from './components/theme-switcher/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 function App() {
   const { currentUser } = useContext(UserContext);
@@ -73,48 +72,23 @@ function App() {
 
 
         <div className={`App ${theme}`}>
-          {/* Sign in button */}
-          {/* <SignInButton /> */}
-
           {/* Light and dark theme switch */}
-          <Switch handleThemeSelection={handleThemeSelection} theme={theme} />
+          <FormControlLabel
+            control={<MaterialUISwitch
+              sx={{ m: 1 }}
+              onClick={handleThemeSelection}
+              // className='switch'
+            />}
+          />
 
-          <div className='stats'>
-            {data && (
-              <>
-                <h2 className='location'>{data.location.name}</h2>
-                <h1 className='main-temp'>{Math.round(data.current.temp_f)}°</h1>
-                <div className='description-container'>
-                  <p id='description'>{data.current.condition.text}</p>
-                  <img src={data.current.condition.icon} alt='weather condition' />
-                </div>
-                <div className='hi-lo'>
-                  <p>H:{Math.round(data.forecast.forecastday[0].day.maxtemp_f)}°</p>
-                  <p>L:{Math.round(data.forecast.forecastday[0].day.mintemp_f)}°</p>
-                </div>
-              </>
-            )}
-
-            <Box
-              display='flex'
-              alignItems='end'
-              justifyContent='center'
-            >
-              <IconButton onClick={handleAddToFavorites}>
-                <FavoriteBorderIcon
-                  id='favorite-icon'
-                  style={{ marginBottom: '-10px' }}
-                />
-              </IconButton>
-              <Box sx={{ fontWeight: 'normal', textAlign: 'center' }}>Favorite</Box>
-            </Box>
-
-            <SearchBox
-              searchField={searchField}
-              handleChange={handleChange}
-              handleSearch={handleSearch}
-            />
-          </div>
+          <Weather
+            data={data}
+            theme={theme}
+            searchField={searchField}
+            handleChange={handleChange}
+            handleSearch={handleSearch}
+            handleAddToFavorites={handleAddToFavorites}
+          />
 
           <div className='forecast'>
             {data && (

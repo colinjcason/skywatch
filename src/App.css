@@ -88,9 +88,6 @@ body {
 }
 
 .main-temp {
-  font-size: 5rem;
-  font-weight: 400;
-  line-height: 5rem;
   background-image: var(--color-accent);
   background-size: 100%;
   background-repeat: repeat;
